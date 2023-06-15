@@ -1,0 +1,38 @@
+.card {
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  background-color: rgb(255, 255, 255);
+  padding: 3%;
+  width: 50%;
+}
+
+.formCard {
+  margin-bottom: 40px;
+}
+.formCard form {
+  display: flex;
+  flex-direction: column;
+}
+.formCard form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.formCard form label input {
+  padding: 0.8%;
+  margin-top: 5px;
+}
+.formCard form button {
+  width: 150px;
+  padding: 2% 0%;
+  background-color: rgb(170, 199, 238);
+  border-radius: 8px;
+  border: none;
+  transition: 0.3s;
+}
+.formCard form button:hover {
+  background-color: rgb(243, 198, 217);
+  cursor: pointer;
+  transform: translateY(-2px);
+}/*# sourceMappingURL=Card.css.map */
