@@ -9,13 +9,21 @@ const UserForm = (props) => {
   function addBtn(e) {
     e.preventDefault();
 
-    const currentData = {
-      name: userName,
-      age: userAge,
-      id: Math.random().toString(),
-    };
+    if (userName && userAge !== "") {
+      const currentData = {
+        name: userName,
+        age: userAge,
+        id: Math.random().toString(),
+      };
 
-    props.addUserData(currentData);
+      props.addUserData(currentData);
+    } else {
+      openErrModal();
+    }
+  }
+
+  function openErrModal() {
+    props.setOpenModal(true);
   }
 
   return (
