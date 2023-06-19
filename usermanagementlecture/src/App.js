@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AddUser from "./components/Users/AddUser";
 import UsersList from "./components/Users/UsersList";
+import { Fragment } from "react";
 
 function App() {
   // App에서 유저리스트를 관리해야
@@ -19,10 +20,10 @@ function App() {
   }
   console.log(usersList);
   return (
-    <div>
+    <Fragment>
       <AddUser onAddUser={addUserHandler} />
       <UsersList users={usersList} />
-    </div>
+    </Fragment>
   );
 }
 
