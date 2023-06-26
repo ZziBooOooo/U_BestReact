@@ -1,72 +1,101 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
+import AuthContext from "../../store/auth-context";
 
 // 리듀서함수는 컴포넌트 함수 밖에 정의했다.
 // 리듀서함수 내부에서는 컴포넌트에서 만들어진 데이터가 필요없기 때문
 const emailReducer = (state, action) => {
+  if (action.type === "USER_INPUT") {
+    return { value: action.val, isValid: action.val.includes("@") };
+  }
+  if (action.type === "INPUT_BLUR") {
+    return { value: state.value, isValid: state.value.includes("@") };
+  }
+  return { value: "", isValid: false };
+};
+
+const passwordReducer = (state, action) => {
+  if (action.type === "USER_INPUT_P") {
+    return { value: action.val, isValid: action.val.trim().length > 6 };
+  }
+  if (action.type === "INPUT_BLUR_P") {
+    return { value: state.value, isValid: state.value.trim().length > 6 };
+  }
   return { value: "", isValid: false };
 };
 
 const Login = (props) => {
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [emailIsValid, setEmailIsValid] = useState();
-  const [enteredPassword, setEnteredPassword] = useState("");
-  const [passwordIsValid, setPasswordIsValid] = useState();
+  // const [enteredEmail, setEnteredEmail] = useState("");
+  // const [emailIsValid, setEmailIsValid] = useState();
+  // const [enteredPassword, setEnteredPassword] = useState("");
+  // const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
     value: "",
-    isValid: false,
+    isValid: null,
+  });
+  const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
+    value: "",
+    isValid: null,
   });
 
-  useEffect(() => {
-    console.log("effect running");
-
-    return () => {
-      console.log("effect cleanup");
-    };
-  }, [enteredPassword]);
+  const authCtx = useContext(AuthContext);
 
   // useEffect(() => {
-  //   const identifier = setTimeout(() => {
-  //     console.log("checking from validity");
-  //     setFormIsValid(
-  //       enteredEmail.includes("@") && enteredPassword.trim().length > 6
-  //     );
-  //   }, 500);
+  //   console.log("effect running");
 
   //   return () => {
-  //     console.log("clean up");
-  //     clearTimeout(identifier);
+  //     console.log("effect cleanup");
   //   };
-  // }, [enteredEmail, enteredPassword]);
+  // }, []);
+
+  // 객체 디스트럭쳐링 - 별칭 할당!
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log("checking from validity");
+      setFormIsValid(emailIsValid && passwordIsValid);
+    }, 500);
+
+    return () => {
+      console.log("clean up");
+      clearTimeout(identifier);
+    };
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
-    setEnteredEmail(event.target.value);
+    dispatchEmail({ type: "USER_INPUT", val: event.target.value });
   };
 
   const passwordChangeHandler = (event) => {
-    setEnteredPassword(event.target.value);
+    // setEnteredPassword(event.target.value);
+    dispatchPassword({ type: "USER_INPUT_P", val: event.target.value });
 
-    setFormIsValid(emailState.isValid && event.target.value.trim().langth > 6);
+    // 아래대신 useEffect 사용하는 것이 더 좋은방법
+    // setFormIsValid(emailState.isValid && passwordState.isValid);
   };
 
   const validateEmailHandler = () => {
-    setEmailIsValid(emailState.isValid);
+    dispatchEmail({ type: "INPUT_BLUR" });
   };
 
   const validatePasswordHandler = () => {
-    setPasswordIsValid(enteredPassword.trim().length > 6);
+    // setPasswordIsValid(enteredPassword.trim().length > 6);
+    dispatchPassword({ type: "INPUT_BLUR_P" });
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, enteredPassword);
+    authCtx.onLogin(emailState.value, passwordState.value);
   };
 
+  // onBlur는 포커싱이 해제되었을 때
   return (
     <Card className={classes.login}>
       <form onSubmit={submitHandler}>
@@ -86,14 +115,14 @@ const Login = (props) => {
         </div>
         <div
           className={`${classes.control} ${
-            passwordIsValid === false ? classes.invalid : ""
+            passwordState.isValid === false ? classes.invalid : ""
           }`}
         >
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
-            value={enteredPassword}
+            value={passwordState.value}
             onChange={passwordChangeHandler}
             onBlur={validatePasswordHandler}
           />
