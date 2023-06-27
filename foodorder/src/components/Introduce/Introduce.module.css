@@ -1,0 +1,10 @@
+.introduce_Box {
+  width: 70%;
+  min-width: 200px;
+  max-width: 800px;
+  color: white;
+  margin-top: 150px;
+}
+.intro_card {
+  padding: 1rem;
+}

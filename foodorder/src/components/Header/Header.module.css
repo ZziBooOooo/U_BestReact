@@ -1,0 +1,19 @@
+.header_Box {
+  background-color: rgb(170, 192, 145);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}
+.header_contentBox {
+  width: 80%;
+  max-width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+h1 {
+  margin: 0;
+  color: white;
+}
