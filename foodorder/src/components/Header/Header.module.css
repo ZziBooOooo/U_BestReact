@@ -1,10 +1,12 @@
 .header_Box {
-  background-color: rgb(170, 192, 145);
+  background-color: rgb(148, 162, 132);
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1rem 0;
+  position: fixed;
+  top: 0;
 }
 .header_contentBox {
   width: 80%;

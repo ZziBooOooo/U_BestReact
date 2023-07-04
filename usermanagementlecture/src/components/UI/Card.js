@@ -8,6 +8,7 @@ import classes from "./Card.module.css";
 // 만약 여기서 ${props.sccClass}로 받는다면
 // <Card sccClass={classes.input}> 이런식으로 전달하는 것
 const Card = (props) => {
+  console.log(props);
   return (
     <div className={`${classes.card} ${props.className}`}>{props.children}</div>
   );
