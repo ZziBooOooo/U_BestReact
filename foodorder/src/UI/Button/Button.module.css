@@ -11,7 +11,7 @@
 
 .button:hover,
 .button:active {
-  background: rgb(250, 178, 202);
+  background: rgb(226, 202, 157);
   color: white;
   transform: translateY(-2px);
   transition: 0.2s;

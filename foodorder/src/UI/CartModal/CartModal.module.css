@@ -1,0 +1,78 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+  position: fixed;
+  top: 30vh;
+  left: 50%;
+  width: 60%;
+  max-width: 1000px;
+  padding: 2rem 1rem;
+  z-index: 100;
+  overflow: hidden;
+  background-color: white;
+  transform: translate(-50%, -50%);
+}
+.cartListContainer {
+  width: 80%;
+  margin: 0 auto;
+}
+.cartListDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.cartListDiv p {
+  font-size: 1.3rem;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+.cartListDiv span:nth-of-type(1) {
+  color: rgb(187, 138, 47);
+  margin-right: 0.8rem;
+}
+
+.cartListDiv span:nth-of-type(2) {
+  border: 1px solid rgb(207, 207, 207);
+  border-radius: 0.3rem;
+  padding: 0.1rem 0.5rem;
+}
+hr {
+  width: 100%;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+.cartListBtnBox {
+  display: flex;
+}
+.cartListBtnBox button {
+  margin: 0 0.3rem;
+  font-size: 1.5rem;
+  width: 2.4rem;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  border: 2px solid rgb(151, 168, 144);
+  transition: 0.3s;
+}
+.cartListBtnBox button:hover {
+  background-color: rgb(151, 168, 144);
+  color: white;
+  transform: translateY(2px);
+}
+.modalBtnBox {
+  float: right;
+  margin-right: 10%;
+}
+.modalBtnBox button {
+  margin-left: 0.6rem;
+}

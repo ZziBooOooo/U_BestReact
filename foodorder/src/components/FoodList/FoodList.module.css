@@ -2,5 +2,36 @@
   background-color: white;
   width: 80%;
   margin-top: 40px;
+  padding: 60px 0;
   max-width: 1400px;
+}
+.foodlist ul > div {
+  width: 90%;
+}
+.foodlist ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+.foodlist ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+.foodlist input {
+  width: 45px;
+  margin-left: 10px;
+}
+hr {
+  width: 100%;
+  background-color: rgb(182, 182, 182);
+}
+p {
+  margin: 10px;
+}
+.addBtn {
+  background-color: rgb(224, 233, 230) !important;
+  margin-top: 20px;
 }
