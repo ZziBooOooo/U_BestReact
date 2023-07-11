@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Card from "../Card/Card";
 import Button from "../Button/Button";
@@ -13,6 +13,7 @@ const Backdrop = (props) => {
 
 const ModalOverlay = (props) => {
   const cartCtx = useContext(CartContext);
+  const [totalAmount, setTotalAmount] = useState(0);
 
   function addAmount(id) {
     const updatedData = cartCtx.cartData.map((item) => {
@@ -39,6 +40,15 @@ const ModalOverlay = (props) => {
     cartCtx.setCartData(updatedData);
   }
 
+  useEffect(() => {
+    let prices = 0;
+    cartCtx.cartData.map((item) => {
+      const price = item.price * item.amount;
+      prices += price;
+    });
+    setTotalAmount(prices.toFixed(2));
+  }, [cartCtx.cartData]);
+
   return (
     <Card className={style.modal}>
       {props.cartData.map((list) => {
@@ -59,6 +69,10 @@ const ModalOverlay = (props) => {
           </div>
         );
       })}
+      <div className={style.priceBox}>
+        <span>Total Amount</span>
+        <span>$ {totalAmount}</span>
+      </div>
       <div className={style.modalBtnBox}>
         <Button>Order</Button>
         <Button onClick={props.onConfirm}>Close</Button>
