@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
@@ -31,6 +32,16 @@ const DUMMY_MEALS = [
     price: 18.99,
   },
 ];
+
+function fetchMeals() {
+  axios
+    .get("https://food-order-3f1f6-default-rtdb.firebaseio.com/Meals.json")
+    .then((response) => console.log(response));
+}
+
+useEffect(() => {
+  fetchMeals();
+}, []);
 
 const AvailableMeals = () => {
   const mealsList = DUMMY_MEALS.map((meal) => (

@@ -3,13 +3,17 @@ import useInputPractice from "../hooks/use-inputpractice";
 
 const BasicForm = (props) => {
   /*
-  useInputPractice()ê°€ ê°ì²´ì— í• ë‹¹ë˜ëŠ” ê²ƒì€ 
-  ë°˜í™˜ ê°’ì´ ê°ì²´ í˜•íƒœë¼ëŠ” ê²ƒê³¼, 
-  êµ¬ì¡° ë¶„í•´ ë¬¸ë²•ì„ ì‚¬ìš©í•´ ê·¸ ê°ì²´ì˜ ê° ì†ì„±ì„ ë³€ìˆ˜ë¡œ 
-  ê°€ì ¸ì˜¨ë‹¤ëŠ” ê°œë…ìœ¼ë¡œ ì´í•´
-  useInputPractice() í˜¸ì¶œ ê²°ê³¼ë¡œ ë°˜í™˜ë˜ëŠ” 
-  ê°ì²´ì˜ ì†ì„±ë“¤ì€ ë³€ìˆ˜ì— ê°ê° í• ë‹¹
+  useInputPractice()°¡ °´Ã¼¿¡ ÇÒ´çµÇ´Â °ÍÀº 
+  ¹ÝÈ¯ °ªÀÌ °´Ã¼ ÇüÅÂ¶ó´Â °Í°ú, 
+  ±¸Á¶ ºÐÇØ ¹®¹ýÀ» »ç¿ëÇØ ±× °´Ã¼ÀÇ °¢ ¼Ó¼ºÀ» º¯¼ö·Î 
+  °¡Á®¿Â´Ù´Â °³³äÀ¸·Î ÀÌÇØ
+  useInputPractice() È£Ãâ °á°ú·Î ¹ÝÈ¯µÇ´Â 
+  °´Ã¼ÀÇ ¼Ó¼ºµéÀº º¯¼ö¿¡ °¢°¢ ÇÒ´ç
   */
+
+  // tip : useInputPractice¿¡ ÀÎÀÚ·Î µé¾î°¡´Â ºÎºÐÀÌ °ãÄ¡´Â °ÍÀÌ ÀÖÀ¸¹Ç·Î
+  // ¾ê³×µµ µû·Î ÇÔ¼ö·Î »©¸é ÁÁÀ» °Í °°´Ù!
+
   const {
     value: firstName,
     isValid: firstNameValid,
