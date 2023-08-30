@@ -10,7 +10,7 @@
 
 .modal {
   position: fixed;
-  top: 30vh;
+  top: 45vh;
   left: 50%;
   width: 60%;
   max-width: 1000px;
@@ -19,6 +19,11 @@
   overflow: hidden;
   background-color: white;
   transform: translate(-50%, -50%);
+}
+.cartListFullContainer {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-bottom: 1.5rem;
 }
 .cartListContainer {
   width: 80%;
@@ -84,4 +89,9 @@ hr {
   margin-bottom: 1rem;
   font-weight: bold;
   font-size: 1.4rem;
+}
+.formBox {
+  width: 80%;
+  margin: 0 auto;
+  background-color: forestgreen;
 }

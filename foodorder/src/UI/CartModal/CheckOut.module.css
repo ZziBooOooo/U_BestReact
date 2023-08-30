@@ -1,0 +1,31 @@
+.fromContainer {
+  width: 80%;
+  margin: 0 auto;
+}
+.inputBox {
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.inputBox label {
+  font-size: 1.2rem;
+}
+.inputBox input {
+  width: 50%;
+  border-radius: 0.3rem;
+  margin-left: 1rem;
+  padding: 0.25rem;
+  border: 1px solid rgb(104, 101, 101);
+}
+.form-actions {
+  float: right;
+  margin-top: 1rem;
+}
+.form-actions button {
+  margin-left: 0.5rem;
+}
+.inputInvalid input {
+  border: 1px solid rgb(177, 131, 45);
+  background-color: rgb(247, 243, 234);
+}

@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Card from "../Card/Card";
 import Button from "../Button/Button";
+import CheckOut from "./CheckOut";
 
 import style from "./CartModal.module.css";
 
@@ -51,37 +52,50 @@ const ModalOverlay = (props) => {
 
   return (
     <Card className={style.modal}>
-      {props.cartData.map((list) => {
-        return (
-          <div key={list.id} className={style.cartListContainer}>
-            <div className={style.cartListDiv}>
-              <div>
-                <p>{list.name}</p>
-                <span>${list.price}</span>
-                <span>x{list.amount}</span>
+      <div className={style.cartListFullContainer}>
+        {props.cartData.map((list) => {
+          return (
+            <div key={list.id} className={style.cartListContainer}>
+              <div className={style.cartListDiv}>
+                <div>
+                  <p>{list.name}</p>
+                  <span>${list.price}</span>
+                  <span>x{list.amount}</span>
+                </div>
+                <div className={style.cartListBtnBox}>
+                  <button onClick={() => subAmount(list.id)}>-</button>
+                  <button onClick={() => addAmount(list.id)}>+</button>
+                </div>
               </div>
-              <div className={style.cartListBtnBox}>
-                <button onClick={() => subAmount(list.id)}>-</button>
-                <button onClick={() => addAmount(list.id)}>+</button>
-              </div>
+              <hr />
             </div>
-            <hr />
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
       <div className={style.priceBox}>
         <span>Total Amount</span>
         <span>$ {totalAmount}</span>
       </div>
-      <div className={style.modalBtnBox}>
-        <Button>Order</Button>
-        <Button onClick={props.onConfirm}>Close</Button>
-      </div>
+      {props.formValid ? (
+        ""
+      ) : (
+        <div className={style.modalBtnBox}>
+          <Button onClick={props.onOrder}>Order</Button>
+          <Button onClick={props.onConfirm}>Close</Button>
+        </div>
+      )}
+      {props.formValid ? <CheckOut></CheckOut> : ""}
     </Card>
   );
 };
 
 const CartModal = (props) => {
+  const [formValid, setFormValid] = useState(false);
+
+  function openForm() {
+    setFormValid(true);
+    console.log("open");
+  }
   return (
     <React.Fragment>
       {ReactDOM.createPortal(
@@ -89,7 +103,12 @@ const CartModal = (props) => {
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
-        <ModalOverlay onConfirm={props.onConfirm} cartData={props.cartData} />,
+        <ModalOverlay
+          onConfirm={props.onConfirm}
+          cartData={props.cartData}
+          formValid={formValid}
+          onOrder={openForm}
+        />,
         document.getElementById("overlay-root")
       )}
     </React.Fragment>

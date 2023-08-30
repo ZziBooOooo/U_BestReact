@@ -1,28 +1,19 @@
-import React, { useContext, useRef } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import Card from "../../UI/Card/Card";
 import Button from "../../UI/Button/Button";
 import CartContext from "../../store/CartData";
+import axios from "axios";
 
 import style from "./FoodList.module.css";
 
-const DUMMY_MEALS = [
-  { id: "m1", name: "Sushi", des: "Finest fish and veggles", price: 22.99 },
-  { id: "m2", name: "Schnitzel", des: "A germaan specialty!", price: 16.5 },
-  {
-    id: "m3",
-    name: "Barbecue Burger",
-    des: "American, raw, meaty",
-    price: 12.99,
-  },
-  {
-    id: "m4",
-    name: "Green Bowl",
-    des: "Healthy, green",
-    price: 18.99,
-  },
-];
-
 const FoodList = (props) => {
+  const [mealList, setMealList] = useState([]);
   const cartCtx = useContext(CartContext);
 
   function addAmount(e) {
@@ -33,7 +24,7 @@ const FoodList = (props) => {
     const amount = parseInt(inputElement.value);
 
     // 버튼 클릭시 해당하는 데이터찾기
-    const selectData = DUMMY_MEALS.filter((item) => item.id == itemId);
+    const selectData = mealList.filter((item) => item.id == itemId);
 
     //context에서 이미 있는 값 있는지 판별
     const existData = cartCtx.cartData.filter((item) => item.id == itemId);
@@ -51,10 +42,27 @@ const FoodList = (props) => {
       existData[0].amount = existDataAmount + amount;
     }
   }
+
+  const fetchMeals = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        "https://food-order-3f1f6-default-rtdb.firebaseio.com/Meals.json"
+      );
+      const data = response.data;
+      setMealList(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchMeals();
+  }, [fetchMeals]);
+
   return (
     <Card className={style.foodlist}>
       <ul>
-        {DUMMY_MEALS.map((foodList) => {
+        {mealList.map((foodList) => {
           return (
             <div key={foodList.id}>
               <li>
