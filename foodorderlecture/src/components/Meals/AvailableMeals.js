@@ -39,10 +39,6 @@ function fetchMeals() {
     .then((response) => console.log(response));
 }
 
-useEffect(() => {
-  fetchMeals();
-}, []);
-
 const AvailableMeals = () => {
   const mealsList = DUMMY_MEALS.map((meal) => (
     <MealItem
@@ -53,6 +49,10 @@ const AvailableMeals = () => {
       price={meal.price}
     />
   ));
+
+  useEffect(() => {
+    fetchMeals();
+  }, []);
 
   return (
     <section className={classes.meals}>
