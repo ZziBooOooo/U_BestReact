@@ -1,64 +1,15 @@
 import { createStore } from "redux";
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 
-const initialState = { counter: 0, showCounter: true };
+import counterReducer from "./counter";
+import authReducer from "./auth";
 
-const counterSlice = createSlice({
-  name: "counter",
-  initialState: initialState,
-  reducers: {
-    increment(state) {
-      state.counter++;
-    },
-    decrement(state) {
-      state.counter--;
-    },
-    increase(state, action) {
-      state.counter = state.counter + action.payload;
-    },
-    toggleCounter(state) {
-      state.showCounter = !state.showCounter;
-    },
+// .reducer 생략가능 - 슬라이스객체 자체를 리듀서로 인식하고 내부적으로 reducer로 사용함
+const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+    auth: authReducer,
   },
 });
-
-// const counterReducer = (state = { counter: 0 }, action) => {
-//   if (action.type === "increment") {
-//     return {
-//       counter: state.counter + 1,
-//       showCounter: state.showCounter,
-//     };
-//   }
-//   if (action.type === "increase") {
-//     return {
-//       counter: state.counter + action.amount,
-//       showCounter: state.showCounter,
-//     };
-//   }
-
-//   if (action.type === "decrement") {
-//     return {
-//       counter: state.counter - 1,
-//       showCounter: state.showCounter,
-//     };
-//   }
-
-//   if (action.type === "toggle") {
-//     return {
-//       showCounter: !state.showCounter,
-//       counter: state.counter,
-//     };
-//   }
-
-//   return state;
-// };
-
-// const store = createStore(counterReducer);
-
-const store = configureStore({
-  reducer: counterSlice.reducer,
-});
-
-export const counterActions = counterSlice.actions;
 
 export default store;
