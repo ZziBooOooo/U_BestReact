@@ -5,7 +5,7 @@ import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
 import Products from "./components/Shop/Products";
 import Notification from "./components/UI/Notification";
-import { sendCartData } from "./store/cart-slice";
+import { sendCartData, fetchCartData } from "./store/cart-actions";
 
 let isInitilal = true;
 
@@ -16,13 +16,18 @@ function App() {
   const notification = useSelector((state) => state.ui.notification);
 
   useEffect(() => {
-    // 앱이 처음 렌더링되면 빈 장바구니로 덮어씌워지는 것을 막음
+    dispatch(fetchCartData());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (isInitilal) {
       isInitilal = false;
       return;
     }
 
-    dispatch(sendCartData(cart));
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    }
   }, [cart, dispatch]);
 
   return (
