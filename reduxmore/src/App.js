@@ -7,7 +7,7 @@ import Products from "./components/Shop/Products";
 import Notification from "./components/UI/Notification";
 import { sendCartData, fetchCartData } from "./store/cart-actions";
 
-let isInitilal = true;
+let isInitial = true;
 
 function App() {
   const dispatch = useDispatch();
@@ -20,8 +20,8 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isInitilal) {
-      isInitilal = false;
+    if (isInitial) {
+      isInitial = false;
       return;
     }
 
