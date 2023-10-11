@@ -17,6 +17,7 @@ export default function Modal({ title, children, onClose }) {
         animate="visible"
         exit="hidden"
       >
+        
         <h2>{title}</h2>
         {children}
       </motion.dialog>
