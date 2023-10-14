@@ -34,4 +34,11 @@ describe("Greeting component", () => {
     const outputElement = screen.getByText("Changed!");
     expect(outputElement).toBeInTheDocument();
   });
+
+  test('does not render "good to see you" if the button was clicked', () => {
+    const outputElement = screen.queryByText("good to see you", {
+      exact: false,
+    });
+    expect(outputElement).toBeNull();
+  });
 });
